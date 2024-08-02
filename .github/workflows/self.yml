@@ -21,7 +21,7 @@ jobs:
         # otherwise the cache takes too long to restore.
         path: |
           ${{ runner.temp }}/conda-standalone
-        key: ${{ runner.os }}-${{ runner.arch }}-${{ hashFiles("tests/requirements*.txt") }}
+        key: ${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tests/requirements*.txt') }}
     - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
       env:
