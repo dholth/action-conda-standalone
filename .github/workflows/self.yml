@@ -5,6 +5,8 @@ on: push
 jobs:
   selftest:
     runs-on: windows-latest
+    env:
+      CONDA_PKGS_DIRS=${{ runner.temp}}/conda-standalone/package
     steps:
     - uses: actions/cache@v4
       with:
@@ -29,3 +31,4 @@ jobs:
       run: |
         ${{ runner.temp }}/conda-standalone/conda.exe info
         ${{ runner.temp }}/conda-standalone/env/Scripts/conda.exe info
+        dir ${{ env.CONDA_PKGS_DIRS }}
