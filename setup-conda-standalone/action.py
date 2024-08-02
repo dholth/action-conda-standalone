@@ -37,8 +37,10 @@ def main():
     print("Environment is")
     pprint.pprint(os.environ)
 
-    output_path = Path("conda-standalone", "conda.exe")
+    output_path = Path("~", "conda-standalone", "conda.exe").expanduser()
     output_path.mkdir()
+
+    print("Ensure", output_path)
 
     if not output_path.exists():
         subprocess.run(

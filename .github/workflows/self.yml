@@ -16,7 +16,8 @@ jobs:
     - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
       run: >
-        ~/conda-standalone/conda.exe install
+        ~/conda-standalone/conda.exe create
+        --prefix ~/conda-standalone/env
         --yes
         --file tests/requirements.txt
         --file tests/requirements-${{ runner.os }}.txt
