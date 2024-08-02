@@ -35,7 +35,7 @@ def list_runs(repository):
 
 def main():
     print("Environment is")
-    pprint.pprint(os.environ)
+    pprint.pprint(dict(os.environ))
 
     output_path = Path("~", "conda-standalone", "conda.exe").expanduser()
     output_path.parent.mkdir(parents=True)

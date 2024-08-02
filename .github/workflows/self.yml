@@ -24,3 +24,7 @@ jobs:
         --file tests/requirements-ci.txt
         --file tests/requirements-s3.txt
         python=${{ matrix.python-version }}
+    - name: Conda Info
+      run: |
+        ~/conda-standalone/conda.exe info
+        ~/conda-standalone/env/Scripts/conda.exe info
