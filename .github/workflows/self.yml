@@ -1,0 +1,10 @@
+name: Selftest
+
+on: push
+
+jobs:
+  selftest:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout
+      - uses: dholth/action-conda-standalone/setup-conda-standalone
