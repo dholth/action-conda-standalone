@@ -10,6 +10,7 @@ jobs:
   selftest:
     runs-on: windows-latest
     steps:
+    - uses: actions/checkout@v4
     - uses: actions/cache@v4
       with:
         enableCrossOsArchive: true
@@ -20,8 +21,7 @@ jobs:
         # otherwise the cache takes too long to restore.
         path: |
           ${{ runner.temp }}/conda-standalone
-        key: ${{ runner.os }}
-    - uses: actions/checkout@v4
+        key: ${{ runner.os }}-${{ runner.arch }}-${{ hashFiles("tests/requirements*.txt") }}
     - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
       env:
