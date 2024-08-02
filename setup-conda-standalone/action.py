@@ -35,8 +35,8 @@ def list_runs(repository):
 
 
 def main():
-    print("Environment is")
-    pprint.pprint(dict(os.environ))
+    # print("Environment is")
+    # pprint.pprint(dict(os.environ))
 
     output_path = Path(os.environ["RUNNER_TEMP"], "conda-standalone", "conda.exe")
     output_path.parent.mkdir(parents=True, exist_ok=True)
