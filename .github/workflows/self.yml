@@ -9,8 +9,15 @@ concurrency:
 jobs:
   selftest:
     runs-on: windows-latest
+    env:
+      MAYBE_PATH: ${{ runner.temp }}\conda-standalone
     steps:
     - uses: actions/checkout@v4
+    - name: Checkout conda source code
+      uses: actions/checkout@v4
+      with:
+        repository: conda/conda
+        path: conda
     - uses: actions/cache@v4
       with:
         enableCrossOsArchive: true
@@ -19,8 +26,11 @@ jobs:
 
         # runner.temp is on a much faster drive D:\ on Windows runners,
         # otherwise the cache takes too long to restore.
+
+        # exclude .conda, keep unpacked subdirectories of package contents
         path: |
           ${{ runner.temp }}/conda-standalone
+          !${{ runner.temp }}/conda-standalone/pkgs/*.conda
         key: ${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tests/requirements*.txt') }}
     - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
@@ -44,3 +54,11 @@ jobs:
         ${{ runner.temp }}\conda-standalone\env\Scripts\conda.exe info
         dir ${{ env.CONDA_PKGS_DIRS }}
         python -c "import pprint, os; pprint.pprint(dict(os.environ))"
+    - name: Run Fast Tests
+      env:
+        # may not be working at jobs: top level?
+        CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
+      working-directory: conda
+      run: >
+        pip install -e . --no-index --no-deps --no-build-isolation
+        pytest -k "not slow and not integration"
