@@ -36,6 +36,12 @@ def main():
     print("Environment is")
     pprint.pprint(os.environ)
 
+    subprocess.run(
+        "curl -OL https://github.com/conda/conda-standalone/releases/download/24.5.0/conda-standalone-24.5.0-Windows-x86_64.exe".split(),
+        check=True,
+        capture_output=False
+    )
+
 
 if __name__ == "__main__":
     main()

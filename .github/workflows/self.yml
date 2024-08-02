@@ -6,5 +6,19 @@ jobs:
   selftest:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/cache@v4
+      with:
+        path: |
+          ~/conda-standalone
+        key: ${{ runner.os }}
+      - uses: actions/checkout
       - uses: dholth/action-conda-standalone/setup-conda-standalone@main
+      - name: Conda Install
+        run: >
+          conda install
+          --yes
+          --file tests/requirements.txt
+          --file tests/requirements-${{ runner.os }}.txt
+          --file tests/requirements-ci.txt
+          --file tests/requirements-s3.txt
+          python=${{ matrix.python-version }}
