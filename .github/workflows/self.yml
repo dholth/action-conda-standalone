@@ -10,7 +10,7 @@ jobs:
   selftest:
     runs-on: windows-latest
     env:
-      CONDA_PKGS_DIRS=${{ runner.temp}}/conda-standalone/package
+      CONDA_PKGS_DIRS: ${{ runner.temp}}/conda-standalone/package
     steps:
     - uses: actions/cache@v4
       with:
