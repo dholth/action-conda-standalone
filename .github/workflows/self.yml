@@ -38,6 +38,7 @@ jobs:
         CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
       # Use --use-index-cache? (doesn't work if no cache at all)
       # these \ are sent to the shell
+      # (conda create will delete old environment if present)
       run: |
           ${{ runner.temp }}\conda-standalone\conda.exe create `
           --yes `
@@ -66,5 +67,6 @@ jobs:
       working-directory: conda
       run: |
         ${{ runner.temp }}\conda-standalone\env\scripts\activate.bat
+        pip install hatchling hatch-vcs
         pip install -e . --no-index --no-deps --no-build-isolation
         pytest -k "not slow and not integration"
