@@ -9,6 +9,7 @@ jobs:
     - uses: actions/cache@v4
       with:
         enableCrossOsArchive: true
+        # fyi  'CONDA': 'C:\\Miniconda', is also a thing in GHA
         path: |
           ${{ runner.temp }}/conda-standalone
         key: ${{ runner.os }}
