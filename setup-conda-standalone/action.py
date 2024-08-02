@@ -16,6 +16,7 @@ REPOSITORY = os.environ.get("INPUT_REPOSITORY")
 
 # ...
 
+
 def list_runs(repository):
     runs = subprocess.run(
         [
@@ -37,7 +38,7 @@ def main():
     print("Environment is")
     pprint.pprint(dict(os.environ))
 
-    output_path = Path(os.environ['RUNNER_TEMP'], "conda-standalone", "conda.exe")
+    output_path = Path(os.environ["RUNNER_TEMP"], "conda-standalone", "conda.exe")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     print("Ensure", output_path)
@@ -46,7 +47,7 @@ def main():
         subprocess.run(
             f"curl -o {output_path} -L https://github.com/conda/conda-standalone/releases/download/24.5.0/conda-standalone-24.5.0-Windows-x86_64.exe".split(),
             check=True,
-            capture_output=False
+            capture_output=False,
         )
 
 
