@@ -25,6 +25,7 @@ jobs:
     - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
       env:
+        # may not be working at jobs: top level?
         CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
       run: >
         ${{ runner.temp }}\conda-standalone\conda.exe create
@@ -36,7 +37,10 @@ jobs:
         --file tests/requirements-s3.txt
         python=${{ matrix.python-version }}
     - name: Conda Info
+      env:
+        CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
       run: |
         ${{ runner.temp }}\conda-standalone\conda.exe info
         ${{ runner.temp }}\conda-standalone\env\Scripts\conda.exe info
         dir ${{ env.CONDA_PKGS_DIRS }}
+        python -c "import pprint, os; pprint.pprint(dict(os.environ))"
