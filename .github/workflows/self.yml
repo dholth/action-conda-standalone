@@ -11,14 +11,14 @@ jobs:
         path: |
           ~/conda-standalone
         key: ${{ runner.os }}
-      - uses: actions/checkout
-      - uses: dholth/action-conda-standalone/setup-conda-standalone@main
-      - name: Conda Install
-        run: >
-          conda install
-          --yes
-          --file tests/requirements.txt
-          --file tests/requirements-${{ runner.os }}.txt
-          --file tests/requirements-ci.txt
-          --file tests/requirements-s3.txt
-          python=${{ matrix.python-version }}
+    - uses: actions/checkout@v4
+    - uses: dholth/action-conda-standalone/setup-conda-standalone@main
+    - name: Conda Install
+      run: >
+        conda install
+        --yes
+        --file tests/requirements.txt
+        --file tests/requirements-${{ runner.os }}.txt
+        --file tests/requirements-ci.txt
+        --file tests/requirements-s3.txt
+        python=${{ matrix.python-version }}
