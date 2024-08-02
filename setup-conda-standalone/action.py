@@ -38,7 +38,7 @@ def main():
     pprint.pprint(dict(os.environ))
 
     output_path = Path(os.environ['RUNNER_TEMP'], "conda-standalone", "conda.exe")
-    output_path.parent.mkdir(parents=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     print("Ensure", output_path)
 
