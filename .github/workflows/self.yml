@@ -10,14 +10,14 @@ jobs:
       with:
         enableCrossOsArchive: true
         path: |
-          ~/conda-standalone
+          ${{ env.RUNNER_TEMP }}/conda-standalone
         key: ${{ runner.os }}
     - uses: actions/checkout@v4
     - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
       run: >
-        ~/conda-standalone/conda.exe create
-        --prefix ~/conda-standalone/env
+        ${{ env.RUNNER_TEMP }}/conda-standalone/conda.exe create
+        --prefix ${{ env.RUNNER_TEMP }}/conda-standalone/env
         --yes
         --file tests/requirements.txt
         --file tests/requirements-${{ runner.os }}.txt
@@ -26,5 +26,5 @@ jobs:
         python=${{ matrix.python-version }}
     - name: Conda Info
       run: |
-        ~/conda-standalone/conda.exe info
-        ~/conda-standalone/env/Scripts/conda.exe info
+        ${{ env.RUNNER_TEMP }}/conda-standalone/conda.exe info
+        ${{ env.RUNNER_TEMP }}/conda-standalone/env/Scripts/conda.exe info

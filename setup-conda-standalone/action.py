@@ -37,7 +37,7 @@ def main():
     print("Environment is")
     pprint.pprint(dict(os.environ))
 
-    output_path = Path("~", "conda-standalone", "conda.exe").expanduser()
+    output_path = Path(os.environ['RUNNER_TEMP'], "conda-standalone", "conda.exe")
     output_path.parent.mkdir(parents=True)
 
     print("Ensure", output_path)
