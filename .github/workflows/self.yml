@@ -73,3 +73,12 @@ jobs:
         pip install -e . --no-index --no-deps --no-build-isolation
         ${{ runner.temp }}\conda-standalone\env\scripts\pytest -k "not slow and not integration" -k gateway
         exit 0
+    - name: Clean Tarballs
+      env:
+        # may not be working at jobs: top level?
+        CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
+      # Use --use-index-cache? (doesn't work if no cache at all)
+      # these \ are sent to the shell
+      # (conda create will delete old environment if present)
+      run: |
+          ${{ runner.temp }}\conda-standalone\conda.exe clean -t -y
