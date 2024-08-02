@@ -13,7 +13,8 @@ jobs:
     - uses: actions/cache@v4
       with:
         enableCrossOsArchive: true
-        # fyi  'CONDA': 'C:\\Miniconda', is also a thing in GHA
+        # fyi  'CONDA': 'C:\\Miniconda', is also a thing in GHA. In most cases
+        # here, / appears to work fine as a dir separator; when will it fail?
         path: |
           ${{ runner.temp }}/conda-standalone
         key: ${{ runner.os }}
@@ -21,10 +22,10 @@ jobs:
     - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
       env:
-        CONDA_PKGS_DIRS: ${{ runner.temp }}/conda-standalone/package
+        CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
       run: >
-        ${{ runner.temp }}/conda-standalone/conda.exe create
-        --prefix ${{ runner.temp }}/conda-standalone/env
+        ${{ runner.temp }}\conda-standalone\conda.exe create
+        --prefix ${{ runner.temp }}\conda-standalone\env
         --yes
         --file tests/requirements.txt
         --file tests/requirements-${{ runner.os }}.txt
@@ -33,6 +34,6 @@ jobs:
         python=${{ matrix.python-version }}
     - name: Conda Info
       run: |
-        ${{ runner.temp }}/conda-standalone/conda.exe info
-        ${{ runner.temp }}/conda-standalone/env/Scripts/conda.exe info
+        ${{ runner.temp }}\conda-standalone\conda.exe info
+        ${{ runner.temp }}\conda-standalone\env\Scripts\conda.exe info
         dir ${{ env.CONDA_PKGS_DIRS }}
