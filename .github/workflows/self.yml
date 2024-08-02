@@ -69,6 +69,6 @@ jobs:
       working-directory: conda
       run: |
         ${{ runner.temp }}\conda-standalone\env\scripts\activate.bat
-        pip install hatchling hatch-vcs
+        pip install hatchling hatch-vcs editables
         pip install -e . --no-index --no-deps --no-build-isolation
         pytest -k "not slow and not integration"

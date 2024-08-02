@@ -15,7 +15,7 @@ pycosat >=0.6.3
 python >=3.8
 requests >=2.28.0,<3
 ruamel.yaml >=0.11.14,<0.19
-setuptools >=60.0.0
+setuptools >=61
 setuptools_scm  # for devenv version detection
 tqdm >=4
 zstandard >=0.15
