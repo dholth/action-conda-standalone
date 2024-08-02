@@ -60,5 +60,6 @@ jobs:
         CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
       working-directory: conda
       run: >
+        ${{ runner.temp }}\conda-standalone\env\scripts\activate.bat
         pip install -e . --no-index --no-deps --no-build-isolation
         pytest -k "not slow and not integration"
