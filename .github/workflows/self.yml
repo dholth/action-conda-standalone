@@ -9,8 +9,7 @@ concurrency:
 jobs:
   selftest:
     runs-on: windows-latest
-    env:
-      MAYBE_PATH: ${{ runner.temp }}\conda-standalone
+    # ${{ runner.temp }} is undefined here
     steps:
     - uses: actions/checkout@v4
     - name: Checkout conda source code
