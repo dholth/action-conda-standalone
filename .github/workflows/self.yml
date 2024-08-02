@@ -40,10 +40,12 @@ jobs:
       # these \ are sent to the shell
       # (conda create will delete old environment if present)
       run: |
-          ${{ runner.temp }}\conda-standalone\conda.exe create `
-          --yes `
-          --prefix ${{ runner.temp }}\conda-standalone\env
-
+          if ( -not (Test-Path -Path ${{ runner.temp }}\conda-standalone\env ) )
+          {
+            ${{ runner.temp }}\conda-standalone\conda.exe create `
+            --yes `
+            --prefix ${{ runner.temp }}\conda-standalone\env
+          }
           ${{ runner.temp }}\conda-standalone\conda.exe install `
           --prefix ${{ runner.temp }}\conda-standalone\env `
           --yes `
