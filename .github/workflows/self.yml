@@ -15,6 +15,9 @@ jobs:
         enableCrossOsArchive: true
         # fyi  'CONDA': 'C:\\Miniconda', is also a thing in GHA. In most cases
         # here, / appears to work fine as a dir separator; when will it fail?
+
+        # runner.temp is on a much faster drive D:\ on Windows runners,
+        # otherwise the cache takes too long to restore.
         path: |
           ${{ runner.temp }}/conda-standalone
         key: ${{ runner.os }}
