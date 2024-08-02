@@ -36,7 +36,7 @@ jobs:
       env:
         # may not be working at jobs: top level?
         CONDA_PKGS_DIRS: ${{ runner.temp }}\conda-standalone\pkgs
-      # Use --use-index-cache?
+      # Use --use-index-cache? (doesn't work if no cache at all)
       # these \ are sent to the shell
       run: |
           ${{ runner.temp }}\conda-standalone\conda.exe create `
@@ -46,7 +46,6 @@ jobs:
           ${{ runner.temp }}\conda-standalone\conda.exe install `
           --prefix ${{ runner.temp }}\conda-standalone\env `
           --yes `
-          --use-index-cache `
           --file tests/requirements.txt `
           --file tests/requirements-${{ runner.os }}.txt `
           --file tests/requirements-ci.txt `
