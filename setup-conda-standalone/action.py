@@ -61,7 +61,8 @@ def main():
             capture_output=False,
         )
 
-        os.chmod(output_path, os.stat(output_path).st_mode | stat.S_IEXEC)
+        if system != "Windows":
+            os.chmod(output_path, os.stat(output_path).st_mode | stat.S_IEXEC)
 
 
 if __name__ == "__main__":
