@@ -7,8 +7,9 @@ Setup a conda environment using conda-standalone.
 
 import json
 import os
-import subprocess
 import pprint
+import stat
+import subprocess
 from pathlib import Path
 
 # pass in env: section; not automatic from github actions
@@ -49,6 +50,9 @@ def main():
             check=True,
             capture_output=False,
         )
+
+        stat = os.stat(output_path)
+        os.chmod(output_path, stat.st_mode | stat.S_IEXEC)
 
 
 if __name__ == "__main__":
