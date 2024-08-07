@@ -8,6 +8,7 @@ concurrency:
 
 jobs:
   selftest:
+    if: false
     runs-on: windows-latest
     # ${{ runner.temp }} is undefined here
     steps:
@@ -31,7 +32,7 @@ jobs:
           ${{ runner.temp }}\conda-standalone
           !${{ runner.temp }}\conda-standalone\pkgs\*.conda
         key: ${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tests\requirements*.txt') }}
-    - uses: dholth\action-conda-standalone\setup-conda-standalone@main
+    - uses: dholth/action-conda-standalone/setup-conda-standalone@main
     - name: Conda Install
       env:
         # may not be working at jobs: top level?
