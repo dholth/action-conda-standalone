@@ -8,7 +8,7 @@ concurrency:
 
 jobs:
   selftest:
-    if: false
+    if: true
     runs-on: windows-latest
     # ${{ runner.temp }} is undefined here
     steps:
@@ -41,6 +41,7 @@ jobs:
       # these \ are sent to the shell
       # (conda create will delete old environment if present)
       run: |
+          python -m pip list
           if ( -not (Test-Path -Path ${{ runner.temp }}\conda-standalone\env ) )
           {
             ${{ runner.temp }}\conda-standalone\conda.exe create `
