@@ -49,7 +49,7 @@ def main():
 
     version = "24.5.0"
     system = {"Darwin": "MacOS"}.get(uname.system, uname.system)
-    machine = uname.machine
+    machine = {"AMD64": "x86_64"}.get(uname.machine, uname.machine)
     conda_standalone = f"conda-standalone-{version}-{system}-{machine}.exe"
     conda_standalone_base = "https://github.com/conda/conda-standalone/releases/download"
     conda_standalone_url = f"{conda_standalone_base}/{version}/{conda_standalone}"
