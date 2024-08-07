@@ -121,11 +121,11 @@ jobs:
       # (conda create will delete old environment if present)
       run: |
           [[ -x ${{ runner.temp }}/conda-standalone/env ]] || \
-            ${{ runner.temp }}/conda-standalone/conda create \
+            ${{ runner.temp }}/conda-standalone/conda.exe create \
             --yes \
             --prefix ${{ runner.temp }}/conda-standalone/env
 
-          ${{ runner.temp }}/conda-standalone/conda install \
+          ${{ runner.temp }}/conda-standalone/conda.exe install \
           --prefix ${{ runner.temp }}/conda-standalone/env \
           --yes \
           --file tests/requirements.txt \
