@@ -51,8 +51,7 @@ def main():
             capture_output=False,
         )
 
-        stat = os.stat(output_path)
-        os.chmod(output_path, stat.st_mode | stat.S_IEXEC)
+        os.chmod(output_path, os.stat(output_path).st_mode | stat.S_IEXEC)
 
 
 if __name__ == "__main__":
