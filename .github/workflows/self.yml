@@ -147,10 +147,10 @@ jobs:
         CONDA_PKGS_DIRS: ${{ runner.temp }}/conda-standalone/pkgs
       working-directory: conda
       run: |
-        source ${{ runner.temp }}/conda-standalone/env/scripts/activate
+        source ${{ runner.temp }}/conda-standalone/env/bin/activate
         pip install hatchling hatch-vcs editables
         pip install -e . --no-index --no-deps --no-build-isolation
-        ${{ runner.temp }}/conda-standalone/env/scripts/pytest -k "not slow and not integration" -k gateway
+        ${{ runner.temp }}/conda-standalone/env/bin/pytest -k "not slow and not integration" -k gateway
         exit 0
     - name: Clean Tarballs
       env:
