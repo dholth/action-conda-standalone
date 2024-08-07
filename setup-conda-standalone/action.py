@@ -53,6 +53,7 @@ def main():
     conda_standalone = f"conda-standalone-{version}-{system}-{machine}.exe"
     conda_standalone_base = "https://github.com/conda/conda-standalone/releases/download"
     conda_standalone_url = f"{conda_standalone_base}/{version}/{conda_standalone}"
+    print("Fetch", conda_standalone_url)
     if not output_path.exists():
         subprocess.run(
             f"curl -o {output_path} -L {conda_standalone_url}".split(),
