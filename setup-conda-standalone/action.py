@@ -10,6 +10,7 @@ import os
 import pprint
 import stat
 import subprocess
+import platform
 from pathlib import Path
 
 # pass in env: section; not automatic from github actions
@@ -44,9 +45,17 @@ def main():
 
     print("Ensure", output_path)
 
+    uname = platform.uname()
+
+    version = "24.5.0"
+    system = {"Darwin": "MacOS"}.get(uname.system, uname.system)
+    machine = uname.machine
+    conda_standalone = f"conda-standalone-{version}-{system}-{machine}.exe"
+    conda_standalone_base = "https://github.com/conda/conda-standalone/releases/download"
+    conda_standalone_url = f"{conda_standalone_base}/{version}/{conda_standalone}"
     if not output_path.exists():
         subprocess.run(
-            f"curl -o {output_path} -L https://github.com/conda/conda-standalone/releases/download/24.5.0/conda-standalone-24.5.0-Windows-x86_64.exe".split(),
+            f"curl -o {output_path} -L {conda_standalone_url}".split(),
             check=True,
             capture_output=False,
         )
