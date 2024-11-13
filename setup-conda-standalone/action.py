@@ -7,7 +7,6 @@ Setup a conda environment using conda-standalone.
 
 import json
 import os
-import pprint
 import stat
 import subprocess
 import platform
@@ -47,7 +46,7 @@ def main():
 
     uname = platform.uname()
 
-    version = "24.5.0"
+    version = "24.9.2"
     system = {"Darwin": "MacOS"}.get(uname.system, uname.system)
     machine = {"AMD64": "x86_64"}.get(uname.machine, uname.machine)
     conda_standalone = f"conda-standalone-{version}-{system}-{machine}.exe"
@@ -61,7 +60,7 @@ def main():
             capture_output=False,
         )
 
-        if system != "Windows":
+        if system != "Windows": # +x may be permissable on Windows
             os.chmod(output_path, os.stat(output_path).st_mode | stat.S_IEXEC)
 
 
