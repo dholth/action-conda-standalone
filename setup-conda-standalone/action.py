@@ -5,34 +5,11 @@ Setup a conda environment using conda-standalone.
 
 # See also https://github.com/lestex/action-pygithubactions
 
-import json
 import os
 import stat
 import subprocess
 import platform
 from pathlib import Path
-
-# pass in env: section; not automatic from github actions
-REPOSITORY = os.environ.get("INPUT_REPOSITORY")
-
-# ...
-
-
-def list_runs(repository):
-    runs = subprocess.run(
-        [
-            "gh",
-            "run",
-            "-R",
-            repository,
-            "ls",
-            "--json",
-            "status,conclusion,databaseId,workflowName,headBranch",
-        ],
-        check=True,
-        capture_output=True,
-    )
-    return json.loads(runs.stdout)
 
 
 def main():
