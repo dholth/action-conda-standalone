@@ -23,7 +23,7 @@ def main():
 
     uname = platform.uname()
 
-    version = "24.9.2"
+    version = "24.7.1"  # 24.9.2 is source only so far?
     system = {"Darwin": "MacOS"}.get(uname.system, uname.system)
     machine = {"AMD64": "x86_64"}.get(uname.machine, uname.machine)
     conda_standalone = f"conda-standalone-{version}-{system}-{machine}.exe"
